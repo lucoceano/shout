@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Screen, NavigationBar, Button, Icon } from '@shoutem/ui';
+import { Text, Screen, NavigationBar } from '@shoutem/ui';
+import { BackButton } from '../NavigationBar';
 
 function Match({ match, navigator }) {
   return (
     <Screen>
       <NavigationBar
         title={`Match ${match.number}`}
-        leftComponent={
-          <Button onPress={() => navigator.pop()}>
-            <Icon name="back" />
-          </Button>
-        }
+        leftComponent={<BackButton navigator={navigator} />}
       />
       <Text>{match.code}</Text>
     </Screen>
@@ -20,9 +17,7 @@ function Match({ match, navigator }) {
 
 Match.propTypes = {
   match: PropTypes.shape({}).isRequired,
-  navigator: PropTypes.shape({
-    pop: PropTypes.func.isRequired,
-  }).isRequired,
+  navigator: PropTypes.shape({}).isRequired,
 };
 
 Match.path = 'com.lucoceano.Match';
