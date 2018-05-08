@@ -36,6 +36,7 @@
     "react-apollo": "^2.1.4",
     "react-native": "^0.55.3",
     "react-native-device-info": "^0.21.5",
-    "react-native-emoji": "https://github.com/jorilallo/react-native-emoji"
+    "react-native-emoji": "https://github.com/jorilallo/react-native-emoji",
+    "react-native-navigation": "^1.1.457"
   }
 }

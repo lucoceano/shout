@@ -1,4 +1,12 @@
-import { AppRegistry } from 'react-native';
-import App from './src';
+import { Navigation } from 'react-native-navigation';
+import registerScreens from './src/screens';
 
-AppRegistry.registerComponent('shout', () => App);
+registerScreens();
+
+Navigation.startSingleScreenApp({
+  screen: {
+    screen: 'com.lucoceano.App',
+  },
+});
+
+// AppRegistry.registerComponent('shout', () => App);

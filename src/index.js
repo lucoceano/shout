@@ -8,8 +8,8 @@ const apiURL = 'http://localhost:3000/graphql';
 
 const client = createClient(apiURL);
 
-export default () => (
+export default ({ navigator }) => (
   <ApolloProvider client={client}>
-    <App />
+    <App navigator={navigator} />
   </ApolloProvider>
 );
