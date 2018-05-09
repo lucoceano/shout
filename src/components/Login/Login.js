@@ -4,12 +4,14 @@ import { compose } from 'redux';
 import { reduxForm, Field } from 'redux-form';
 import { Text, Screen, View, Button, Divider, Heading } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import CloseButton from '../CloseButton';
 import TextInput from '../form/TextInput';
 
-function Login({ handleSubmit, style }) {
+function Login({ handleSubmit, style, onClose }) {
   return (
     <Screen>
       <View styleName="vertical" style={style.root}>
+        <CloseButton onClose={onClose} />
         <View styleName="vertical h-center">
           <Heading style={style.title}>Login</Heading>
         </View>
@@ -29,7 +31,7 @@ function Login({ handleSubmit, style }) {
           placeholder="Password"
           secureTextEntry
         />
-        <Button style={style.button} styleName="dark" onPress={handleSubmit}>
+        <Button style={style.button} styleName="secondary" onPress={handleSubmit}>
           <Text>Login</Text>
         </Button>
       </View>
@@ -39,6 +41,7 @@ function Login({ handleSubmit, style }) {
 
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
 };
 
@@ -49,7 +52,7 @@ const styles = {
     paddingTop: 64,
   },
   button: {
-    marginTop: 8,
+    margin: 16,
   },
   title: {
     padding: 8,
