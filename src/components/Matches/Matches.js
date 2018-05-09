@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, ListView } from '@shoutem/ui';
-import Match from './Match';
+import MatchRow from './MatchRow';
 
 export default function Matches({ loading, matches, error, onItemClick }) {
   if (error) {
@@ -12,13 +12,14 @@ export default function Matches({ loading, matches, error, onItemClick }) {
     <ListView
       data={matches}
       loading={loading}
-      renderRow={match => <Match match={match} onClick={onItemClick} />}
+      renderRow={match => <MatchRow match={match} onClick={onItemClick} />}
     />
   );
 }
 
 Matches.propTypes = {
   loading: PropTypes.bool.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   matches: PropTypes.arrayOf(PropTypes.object),
   error: PropTypes.shape({}),
 };

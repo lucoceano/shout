@@ -1,15 +1,20 @@
-import React from 'react';
-import { ApolloProvider } from 'react-apollo';
+import { Navigation } from 'react-native-navigation';
 import createClient from './graphql/createClient';
-import App from './components/App';
+import createStore from './redux/createStore';
+import registerScreens from './screens';
 import './intl';
 
 const apiURL = 'http://localhost:3000/graphql';
-
 const client = createClient(apiURL);
 
-export default ({ navigator }) => (
-  <ApolloProvider client={client}>
-    <App navigator={navigator} />
-  </ApolloProvider>
-);
+const store = createStore();
+
+registerScreens(client, store);
+
+Navigation.startSingleScreenApp({
+  screen: {
+    screen: 'com.lucoceano.App',
+  },
+});
+
+

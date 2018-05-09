@@ -1,7 +1,16 @@
 import React from 'react';
-import { NavigationBar } from '@shoutem/ui';
+import { NavigationBar, Button, Icon } from '@shoutem/ui';
 
-export default function Header() {
-  return <NavigationBar styleName="inline" title="Shout!" />;
+export default function Header({ onUserClick }) {
+  return (
+    <NavigationBar
+      styleName="inline"
+      title="Shout!"
+      rightComponent={
+        <Button onPress={onUserClick}>
+          <Icon name="user-profile" />
+        </Button>
+      }
+    />
+  );
 }
-

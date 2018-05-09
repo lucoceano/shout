@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Emoji from 'react-native-emoji';
-import { View, Text, Caption, TouchableOpacity } from '@shoutem/ui';
+import { View, Text, Caption } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import moment from 'moment-timezone';
-import MatchTeam from './MatchTeam';
+import Team from './Team';
 
-function Match({ match, style, onClick }) {
+function MatchInfo({ match, style }) {
   return (
-    <TouchableOpacity style={style.root} onPress={() => onClick(match)}>
+    <View style={style.root}>
       <View styleName="vertical h-center">
         <Caption>{`Match ${match.number}`}</Caption>
         <View styleName="horizontal v-center h-center" style={style.container}>
-          <MatchTeam team={match.teams.home}>
+          <Team team={match.teams.home}>
             {team => (
               <View styleName="horizontal v-center">
                 <Text style={style.flag}>
@@ -21,9 +21,9 @@ function Match({ match, style, onClick }) {
                 <Text style={style.score}>{match.score.home}</Text>
               </View>
             )}
-          </MatchTeam>
+          </Team>
           <Text>x</Text>
-          <MatchTeam team={match.teams.away}>
+          <Team team={match.teams.away}>
             {team => (
               <View styleName="horizontal v-center">
                 <Text style={style.score}>{match.score.away}</Text>
@@ -32,18 +32,18 @@ function Match({ match, style, onClick }) {
                 </Text>
               </View>
             )}
-          </MatchTeam>
+          </Team>
         </View>
         <View styleName="vertical h-center">
           <Text style={style.info}>{moment(match.date).format('LLLL')}</Text>
           <Text style={style.info}>{match.location}</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
-Match.propTypes = {
+MatchInfo.propTypes = {
   match: PropTypes.shape({}).isRequired,
   style: PropTypes.shape({}).isRequired,
 };
@@ -75,4 +75,4 @@ const styles = {
   },
 };
 
-export default connectStyle('com.lucoceano.Match', styles)(Match);
+export default connectStyle('com.lucoceano.Match', styles)(MatchInfo);

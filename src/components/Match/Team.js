@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
-export default function MatchTeam({ team, children }) {
+export default function Team({ team, children }) {
   return children(team);
 }
 
-MatchTeam.propTypes = {
+Team.propTypes = {
   team: PropTypes.shape({}).isRequired,
   children: PropTypes.func,
 };
 
-MatchTeam.defaultProps = {
+Team.defaultProps = {
   children: () => {},
 };

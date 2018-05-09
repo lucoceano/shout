@@ -1,17 +1,37 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import { Navigation } from 'react-native-navigation';
-import Root from '../';
+import App from '../components/App';
 import Match from '../components/Match';
+import User from '../components/User';
 
 const defaultNavigatorStyle = {
   navBarHidden: true,
 };
 
-const registerScreen = (name, component, styles = {}) => {
-  component.navigatorStyle = { ...defaultNavigatorStyle, ...styles };
-  Navigation.registerComponent(name, () => component);
+const components = [App, Match, User];
+
+const withApollo = (WrappedComponent, client, store) => {
+  function Enhance(props) {
+    return (
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <WrappedComponent {...props} />
+        </ApolloProvider>
+      </Provider>
+    );
+  }
+  return Enhance;
 };
 
-export default function registerScreens() {
-  registerScreen('com.lucoceano.App', Root);
-  registerScreen(Match.path, Match);
+const registerScreen = (client, store, component, styles = {}) => {
+  const Component = withApollo(component, client, store);
+  Component.navigatorStyle = { ...defaultNavigatorStyle, ...styles };
+
+  Navigation.registerComponent(component.path, () => Component);
+};
+
+export default function registerScreens(client, store) {
+  components.forEach(component => registerScreen(client, store, component));
 }
