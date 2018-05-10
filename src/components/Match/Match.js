@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { View, Screen, NavigationBar, Caption } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import { BackButton } from '../NavigationBar';
@@ -8,21 +10,25 @@ import Bet from '../Bet';
 
 function Match({ match, navigator, style }) {
   return (
-    <Screen>
-      <NavigationBar
-        title={`Match ${match.number}`}
-        styleName="inline"
-        leftComponent={<BackButton navigator={navigator} />}
-      />
-      <View styleName="vertical v-center h-center" style={style.info}>
-        <Caption>INFORMATION</Caption>
-      </View>
-      <MatchInfo match={match} />
-      <View styleName="vertical v-center h-center" style={style.info}>
-        <Caption>BET</Caption>
-      </View>
-      <Bet match={match} />
-    </Screen>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <Screen>
+        <NavigationBar
+          title={`Match ${match.number}`}
+          styleName="inline"
+          leftComponent={<BackButton navigator={navigator} />}
+        />
+        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={false}>
+          <View styleName="vertical v-center h-center" style={style.info}>
+            <Caption>INFORMATION</Caption>
+          </View>
+          <MatchInfo match={match} />
+          <View styleName="vertical v-center h-center" style={style.info}>
+            <Caption>BET</Caption>
+          </View>
+          <Bet match={match} />
+        </KeyboardAwareScrollView>
+      </Screen>
+    </TouchableWithoutFeedback>
   );
 }
 

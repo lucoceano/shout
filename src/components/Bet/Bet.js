@@ -34,6 +34,7 @@ function Bet({ match, loggedIn, style, onLoginRequest, handleSubmit }) {
             keyboardType="numeric"
             textAlign="center"
             placeholder="-"
+            selectTextOnFocus
           />
         </View>
         <Text>x</Text>
@@ -46,6 +47,7 @@ function Bet({ match, loggedIn, style, onLoginRequest, handleSubmit }) {
               keyboardType="numeric"
               textAlign="center"
               placeholder="-"
+              selectTextOnFocus
             />
             <Text style={style.flag}>
               <Emoji name={match.teams.away.emoji} />

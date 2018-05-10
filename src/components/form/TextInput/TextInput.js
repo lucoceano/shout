@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextInput as UITextInput, View } from '@shoutem/ui';
 
 function TextInput(props) {
@@ -16,5 +17,9 @@ function TextInput(props) {
     </View>
   );
 }
+
+TextInput.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+};
 
 export default TextInput;
