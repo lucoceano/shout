@@ -8,31 +8,24 @@ import Bet from './Bet';
 import Login from '../Login';
 import { isNotLoggedInError } from '../../lib/error';
 import removeTypename from '../../lib/removeTypename';
+import betFragment from '../../graphql/fragments/bet';
 
 const betQuery = gql`
   query bet($matchId: String!) {
     bet(matchId: $matchId) {
-      id
-      score {
-        home
-        away
-      }
-      penalty
+      ...bet
     }
   }
+  ${betFragment}
 `;
 
 const betMutation = gql`
   mutation configureBet($input: BetInput!) {
     configureBet(input: $input) {
-      id
-      score {
-        home
-        away
-      }
-      penalty
+      ...bet
     }
   }
+  ${betFragment}
 `;
 
 class BetContainer extends Component {
