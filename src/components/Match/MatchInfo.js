@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Dimensions } from 'react-native';
 import Emoji from 'react-native-emoji';
 import { View, Text, Caption } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import moment from 'moment-timezone';
 import Team from './Team';
+
+const defaultFlagSize = 75;
+const proportion = Dimensions.get('window').width / 375;
 
 function MatchInfo({ match, style }) {
   return (
@@ -50,15 +54,15 @@ MatchInfo.propTypes = {
 
 const styles = {
   root: {
-    margin: 8,
-    padding: 16,
+    margin: 8 * proportion,
+    padding: 8 * proportion,
     elevation: 1,
     backgroundColor: '#ffffff',
   },
   flag: {
-    paddingLeft: 16,
-    paddingRight: 16,
-    fontSize: 75,
+    paddingLeft: 16 * proportion,
+    paddingRight: 16 * proportion,
+    fontSize: defaultFlagSize * proportion,
   },
   container: {
     justifyContent: 'center',
@@ -67,7 +71,7 @@ const styles = {
   score: {
     padding: 8,
     fontSize: 36,
-    width: 56,
+    width: 55,
     textAlign: 'center',
   },
   info: {
