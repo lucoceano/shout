@@ -1,2 +1,2 @@
-export default from './Match';
+export default from './MatchContainer';
 export { default as MatchInfo } from './MatchInfo';

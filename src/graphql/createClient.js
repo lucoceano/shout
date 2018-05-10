@@ -1,11 +1,19 @@
+import { AsyncStorage } from 'react-native';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
+import { persistCache } from 'apollo-cache-persist';
 
 export default function createClient(uri) {
   const cache = new InMemoryCache();
+
+  persistCache({
+    cache,
+    storage: AsyncStorage,
+    trigger: 'background',
+  });
 
   const defaultOptions = {
     watchQuery: {

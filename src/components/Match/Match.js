@@ -32,8 +32,6 @@ Match.propTypes = {
   navigator: PropTypes.shape({}).isRequired,
 };
 
-Match.path = 'com.lucoceano.Match';
-
 const styles = {
   info: {
     padding: 16,

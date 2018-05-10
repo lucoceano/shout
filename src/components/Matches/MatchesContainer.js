@@ -4,31 +4,16 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Match from '../Match';
 import Matches from './Matches';
+import matchFragment from '../../graphql/fragments/match';
 
 const pollingInterval = 5000;
 const matchesQuery = gql`
   query matches {
     matches {
-      id
-      date
-      number
-      location
-      teams {
-        home {
-          code
-          emoji
-        }
-        away {
-          code
-          emoji
-        }
-      }
-      score {
-        home
-        away
-      }
+      ...match
     }
   }
+  ${matchFragment}
 `;
 
 class MatchesContainer extends Component {
@@ -44,7 +29,7 @@ class MatchesContainer extends Component {
 
   render() {
     return (
-      <Query query={matchesQuery} pollInterval={pollingInterval}>
+      <Query query={matchesQuery} pollInterval={pollingInterval} networkPolicy="network-only">
         {({ loading, data: { matches } = {}, error }) => (
           <Matches
             loading={loading}

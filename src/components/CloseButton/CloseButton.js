@@ -4,8 +4,9 @@ import { Button, Icon } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 
 function CloseButton({ style, onClose, disableGutter }) {
+  const styling = disableGutter ? {} : { style: style.close };
   return (
-    <Button styleName="clear" style={!disableGutter && style.close} onPress={onClose}>
+    <Button styleName="clear" onPress={onClose} {...styling}>
       <Icon name="close" />
     </Button>
   );
