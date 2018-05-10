@@ -32,4 +32,4 @@ const styles = {
   },
 };
 
-export default connectStyle('com.lucoceano.Login', styles)(UserDetail);
+export default connectStyle('com.lucoceano.UserDetail', styles)(UserDetail);

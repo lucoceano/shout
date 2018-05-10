@@ -5,12 +5,13 @@ import { Navigation } from 'react-native-navigation';
 import App from '../components/App';
 import Match from '../components/Match';
 import User from '../components/User';
+import Login from '../components/Login';
 
 const defaultNavigatorStyle = {
   navBarHidden: true,
 };
 
-const components = [App, Match, User];
+const components = [App, Match, User, Login];
 
 const withApollo = (WrappedComponent, client, store) => {
   function Enhance(props) {

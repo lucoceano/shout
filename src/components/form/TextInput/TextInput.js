@@ -11,7 +11,7 @@ function TextInput(props) {
         onChangeText={input.onChange}
         onBlur={input.onBlur}
         onFocus={input.onFocus}
-        value={input.value}
+        value={String(input.value)}
       />
     </View>
   );

@@ -16,7 +16,6 @@ function Login({ handleSubmit, style, onClose }) {
           <Heading style={style.title}>Login</Heading>
         </View>
         <Field
-          style={style.field}
           name="email"
           component={TextInput}
           placeholder="Email"
@@ -24,13 +23,7 @@ function Login({ handleSubmit, style, onClose }) {
           autoCorrect={false}
         />
         <Divider styleName="line" />
-        <Field
-          style={style.field}
-          name="password"
-          component={TextInput}
-          placeholder="Password"
-          secureTextEntry
-        />
+        <Field name="password" component={TextInput} placeholder="Password" secureTextEntry />
         <Button style={style.button} styleName="secondary" onPress={handleSubmit}>
           <Text>Login</Text>
         </Button>

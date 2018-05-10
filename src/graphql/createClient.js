@@ -16,9 +16,9 @@ export default function createClient(uri) {
   const link = ApolloLink.from([
     onError(({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) =>
+        graphQLErrors.map(({ message, code, locations, path }) =>
           console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+            `[GraphQL error]: Message: ${message}, Code: ${code}, Location: ${locations}, Path: ${path}`,
           ),
         );
       }
