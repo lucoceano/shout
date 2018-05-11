@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Snackbar from 'react-native-snackbar';
 import Match from '../Match';
 import Matches from './Matches';
 import matchFragment from '../../graphql/fragments/match';
@@ -30,14 +31,12 @@ class MatchesContainer extends Component {
   render() {
     return (
       <Query query={matchesQuery} pollInterval={pollingInterval} networkPolicy="network-only">
-        {({ loading, data: { matches } = {}, error }) => (
-          <Matches
-            loading={loading}
-            error={error}
-            matches={matches}
-            onItemClick={this.navigateToMatch}
-          />
-        )}
+        {({ loading, data: { matches } = {}, error }) => {
+          if (error) {
+            Snackbar.show({ title: 'Ocorreu um erro.' });
+          }
+          return <Matches loading={loading} matches={matches} onItemClick={this.navigateToMatch} />;
+        }}
       </Query>
     );
   }

@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@shoutem/ui';
+import { Text, View, Spinner } from '@shoutem/ui';
 import UserDetail from './UserDetail';
 import Auth from '../Auth';
 
 function User({ loading, user, onLogout, onClose }) {
   if (loading) {
-    return <Text>Loading...</Text>;
+    return (
+      <View styleName="center">
+        <Spinner />
+        <Text>Loading...</Text>
+      </View>
+    );
   }
 
   if (user) {

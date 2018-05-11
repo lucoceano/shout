@@ -1,14 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { View, Text, Button } from '@shoutem/ui';
+import { View, Text, Button, Spinner } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import Emoji from 'react-native-emoji';
 import { reduxForm, Field } from 'redux-form';
 import SwitchInput from '../form/Switch';
 import TextInput from '../form/TextInput';
 
-function Bet({ match, loggedIn, style, onLoginRequest, handleSubmit }) {
+function Bet({ match, loading, loggedIn, style, onLoginRequest, handleSubmit }) {
+  if (loading) {
+    return (
+      <View styleName="center">
+        <Spinner />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   if (!loggedIn) {
     return (
       <View styleName="vertical" style={style.root}>

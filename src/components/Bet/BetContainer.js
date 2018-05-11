@@ -56,9 +56,9 @@ class BetContainer extends Component {
                 onSubmit={async ({ id, ...input }) => {
                   try {
                     await configureBet({ variables: { input: { ...input, matchId: match.id } } });
-                    Snackbar.show({ title: 'Palpite salvo com sucesso!' });
+                    Snackbar.show({ title: 'Palpite salvo com sucesso.' });
                   } catch (e) {
-                    Snackbar.show({ title: 'Não foi possível salvar seu palpite!' });
+                    Snackbar.show({ title: 'Não foi possível salvar seu palpite.' });
                   }
                 }}
               />

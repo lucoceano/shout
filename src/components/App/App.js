@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Screen, View, Text } from '@shoutem/ui';
+import { Screen } from '@shoutem/ui';
 import Matches from '../Matches';
+import Groups from '../Groups';
 import Header from '../Header';
 import User from '../User';
 
@@ -12,7 +13,7 @@ class App extends Component {
   };
 
   state = {
-    selectedTab: 0,
+    selectedTab: 1,
   };
 
   onUserClick = () => {
@@ -38,11 +39,7 @@ class App extends Component {
         />
 
         {selectedTab === 0 && <Matches navigator={navigator} />}
-        {selectedTab === 1 && (
-          <View>
-            <Text>Groups</Text>
-          </View>
-        )}
+        {selectedTab === 1 && <Groups />}
       </Screen>
     );
   }
