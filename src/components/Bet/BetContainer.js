@@ -5,7 +5,7 @@ import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Snackbar from 'react-native-snackbar';
 import Bet from './Bet';
-import Login from '../Login';
+import Auth from '../Auth';
 import { isNotLoggedInError } from '../../lib/error';
 import removeTypename from '../../lib/removeTypename';
 import betFragment from '../../graphql/fragments/bet';
@@ -35,7 +35,7 @@ class BetContainer extends Component {
 
   onLoginRequest = () => {
     Navigation.showModal({
-      screen: Login.path,
+      screen: Auth.path,
     });
   };
 

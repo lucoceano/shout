@@ -4,21 +4,21 @@ import { Mutation, withApollo } from 'react-apollo';
 import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
-import Login from './Login';
-import { isAlreadyLoggedInError } from '../../lib/error';
-
-const initialValues = __DEV__ ? { email: 'lucoceano@gmail.com', password: 'Mamamia27' } : undefined;
+import SignUp from './SignUp';
+import { isAlreadyLoggedInError } from '../../../lib/error';
+import { getPersistor } from '../../../graphql/cache';
 
 const loginMutation = gql`
-  mutation login($input: LoginInput!) {
-    login(input: $input) {
+  mutation signup($input: SignupInput!) {
+    signup(input: $input) {
       name
+      email
     }
   }
 `;
 
-class LoginContainer extends Component {
-  static path = 'com.lucoceano.Login';
+class SignUpContainer extends Component {
+  static path = 'com.lucoceano.SignUp';
 
   static propTypes = {
     client: PropTypes.shape({}).isRequired,
@@ -31,6 +31,7 @@ class LoginContainer extends Component {
   success = () => {
     const { client } = this.props;
     client.resetStore();
+    getPersistor().purge();
     this.close();
   };
 
@@ -38,9 +39,7 @@ class LoginContainer extends Component {
     return (
       <Mutation mutation={loginMutation}>
         {(login, { client }) => (
-          <Login
-            initialValues={initialValues}
-            onClose={this.close}
+          <SignUp
             onSubmit={async input => {
               try {
                 await login({ variables: { input } });
@@ -60,4 +59,4 @@ class LoginContainer extends Component {
   }
 }
 
-export default withApollo(LoginContainer);
+export default withApollo(SignUpContainer);

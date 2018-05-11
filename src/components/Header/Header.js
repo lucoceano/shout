@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
-import { NavigationBar, Button, Icon, View, Text } from '@shoutem/ui';
+import { NavigationBar, Button, Icon } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import Tabs from '../Tabs';
 
 class Header extends Component {
   static propTypes = {
@@ -33,31 +33,24 @@ class Header extends Component {
     this.props.onTabChange(selectedTab);
   };
 
-  renderTabs = () => {
-    const { style } = this.props;
-    const { selectedTab } = this.state;
-
-    return this.tabs.map(({ title }, i) => (
-      <Button
-        key={title}
-        styleName={`full-width clear ${i !== selectedTab ? 'muted' : ''}`}
-        style={{ ...style.tab, ...(i === selectedTab ? style.selected : {}) }}
-        onPress={() => this.changeTab(i)}
-      >
-        <Text>{title}</Text>
-      </Button>
-    ));
-  };
-
   render() {
     const { style, onUserClick } = this.props;
+    const { selectedTab } = this.state;
     return (
       <NavigationBar
         styleName="inline"
         style={{
           centerComponent: style.centerComponent,
         }}
-        centerComponent={<View styleName="horizontal flexible">{this.renderTabs()}</View>}
+        centerComponent={
+          <Tabs
+            tabs={this.tabs}
+            styleName="flexible"
+            style={style.tabs}
+            onTabChange={this.changeTab}
+            selectedTab={selectedTab}
+          />
+        }
         rightComponent={
           <Button onPress={onUserClick}>
             <Icon name="user-profile" />
@@ -71,13 +64,6 @@ class Header extends Component {
 const styles = {
   centerComponent: {
     flex: 2,
-  },
-  tab: {
-    height: 'auto',
-  },
-  selected: {
-    borderBottomColor: '#000',
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 };
 

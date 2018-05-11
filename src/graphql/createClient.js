@@ -4,12 +4,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
-import { persistCache } from 'apollo-cache-persist';
+import { startCache } from './cache';
 
 export default function createClient(uri) {
   const cache = new InMemoryCache();
 
-  persistCache({
+  startCache({
     cache,
     storage: AsyncStorage,
     trigger: 'background',
@@ -18,6 +18,7 @@ export default function createClient(uri) {
   const defaultOptions = {
     watchQuery: {
       errorPolicy: 'all',
+      fetchPolicy: 'cache-and-network',
     },
   };
 

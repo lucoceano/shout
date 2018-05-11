@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@shoutem/ui';
 import UserDetail from './UserDetail';
-import Login from '../Login';
+import Auth from '../Auth';
 
 function User({ loading, user, onLogout, onClose }) {
   if (loading) {
@@ -13,7 +13,7 @@ function User({ loading, user, onLogout, onClose }) {
     return <UserDetail user={user} onLogout={onLogout} onClose={onClose} />;
   }
 
-  return <Login />;
+  return <Auth />;
 }
 
 User.propTypes = {

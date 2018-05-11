@@ -4,6 +4,7 @@ import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
 import User from './User';
+import { getPersistor } from '../../graphql/cache';
 
 const meQuery = gql`
   query me {
@@ -39,6 +40,7 @@ class UserContainer extends Component {
                   try {
                     await logout();
                     client.resetStore();
+                    getPersistor().purge();
                     this.close();
                   } catch (e) {
                     Snackbar.show({ title: 'Ocorreu um erro' });
