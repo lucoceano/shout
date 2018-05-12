@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Screen, NavigationBar, Button, Text, View, Image, Subtitle } from '@shoutem/ui';
+import { Button, Text, View, Image, Subtitle } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import md5 from 'crypto-js/md5';
-import CloseButton from '../CloseButton';
 
-function UserDetail({ user, style, onLogout, onClose }) {
+function UserDetail({ user, style, onLogout }) {
   return (
-    <Screen>
-      <NavigationBar
-        styleName="inline"
-        title={user.name}
-        rightComponent={<CloseButton onClose={onClose} disableGutter />}
-      />
-
+    <View styleName="vertical">
       <View styleName="md-gutter vertical v-center h-center">
         <Image
           styleName="medium-avatar md-gutter"
@@ -25,13 +18,12 @@ function UserDetail({ user, style, onLogout, onClose }) {
       <Button style={style.button} styleName="secondary" onPress={onLogout}>
         <Text>Logout</Text>
       </Button>
-    </Screen>
+    </View>
   );
 }
 
 UserDetail.propTypes = {
   onLogout: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
   user: PropTypes.shape({}).isRequired,
 };

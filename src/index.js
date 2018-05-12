@@ -4,7 +4,7 @@ import createStore from './redux/createStore';
 import registerScreens from './screens';
 import './intl';
 
-const apiURL = 'http://localhost:3000/graphql';
+const apiURL = 'https://shout-server.herokuapp.com/graphql';
 const client = createClient(apiURL);
 
 const store = createStore();

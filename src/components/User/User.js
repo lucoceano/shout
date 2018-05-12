@@ -1,24 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Spinner } from '@shoutem/ui';
+import { Screen, NavigationBar } from '@shoutem/ui';
+import CloseButton from '../CloseButton';
 import UserDetail from './UserDetail';
+import Loading from '../Loading';
 import Auth from '../Auth';
 
 function User({ loading, user, onLogout, onClose }) {
-  if (loading) {
-    return (
-      <View styleName="center">
-        <Spinner />
-        <Text>Loading...</Text>
-      </View>
-    );
+  if (!user && !loading) {
+    return <Auth />;
   }
 
-  if (user) {
-    return <UserDetail user={user} onLogout={onLogout} onClose={onClose} />;
-  }
-
-  return <Auth />;
+  return (
+    <Screen>
+      <NavigationBar
+        styleName="inline"
+        title="Profile"
+        rightComponent={<CloseButton onClose={onClose} disableGutter />}
+      />
+      {loading && <Loading />}
+      {!loading && <UserDetail user={user} onLogout={onLogout} />}
+    </Screen>
+  );
 }
 
 User.propTypes = {
