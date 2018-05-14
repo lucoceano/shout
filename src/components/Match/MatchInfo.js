@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 import Emoji from 'react-native-emoji';
 import { View, Text, Caption } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
-import moment from 'moment-timezone';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import Team from './Team';
 
 const defaultFlagSize = 75;
@@ -65,13 +65,17 @@ class MatchInfo extends Component {
     return (
       <View style={style.root}>
         <View styleName="vertical h-center">
-          <Caption>{`Match ${match.number}`}</Caption>
+          <Caption>
+            <FormattedMessage id="matchNumber" values={{ number: match.number }} />
+          </Caption>
 
           {match.teams && this.renderTeams()}
           {!match.teams && this.renderNoTeams()}
 
           <View styleName="vertical h-center">
-            <Text style={style.info}>{moment(match.date).format('LLLL')}</Text>
+            <Text style={style.info}>
+              <FormattedDate value={match.date} format="matchDay" />
+            </Text>
             <Text style={style.info}>{match.location}</Text>
           </View>
         </View>

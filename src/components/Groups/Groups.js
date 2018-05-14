@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native';
 import { connectStyle } from '@shoutem/theme';
 import { View, Text, Divider, Title } from '@shoutem/ui';
 import Emoji from 'react-native-emoji';
+import { FormattedMessage } from 'react-intl';
+import intl from '../../intl';
 
 function Groups({ groups, style }) {
   return (
@@ -15,15 +17,19 @@ function Groups({ groups, style }) {
             <Divider styleName="line md-gutter" />
           </View>
           <View style={style.fullWidth}>
-            {group.table.map(({ team, points }) => (
+            {group.table.map(({ team }, index) => (
               <View key={team.code} styleName="vertical h-start">
                 <View styleName="horizontal space-between md-gutter" style={style.fullWidth}>
                   <View styleName="horizontal h-start">
                     <Emoji name={team.emoji} />
-                    <Text styleName="sm-gutter-left">{team.code}</Text>
+                    <Text styleName="sm-gutter-left">
+                      {intl.countries[team.code.toUpperCase()]}
+                    </Text>
                   </View>
                   <View styleName="horizontal h-end" style={{}}>
-                    <Text>{points}</Text>
+                    <Text>
+                      <FormattedMessage id="positionNumber" values={{ number: index + 1 }} />
+                    </Text>
                   </View>
                 </View>
                 <Divider styleName="line" />

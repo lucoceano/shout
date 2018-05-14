@@ -36,6 +36,7 @@
     "prop-types": "^15.6.1",
     "react": "16.3.1",
     "react-apollo": "^2.1.4",
+    "react-intl": "^2.4.0",
     "react-native": "^0.55.3",
     "react-native-device-info": "^0.21.5",
     "react-native-emoji": "https://github.com/jorilallo/react-native-emoji",
