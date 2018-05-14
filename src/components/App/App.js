@@ -13,7 +13,7 @@ class App extends Component {
   };
 
   state = {
-    selectedTab: 1,
+    selectedTab: 0,
   };
 
   onUserClick = () => {

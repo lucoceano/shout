@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 import Emoji from 'react-native-emoji';
@@ -10,41 +10,74 @@ import Team from './Team';
 const defaultFlagSize = 75;
 const proportion = Dimensions.get('window').width / 375;
 
-function MatchInfo({ match, style }) {
-  return (
-    <View style={style.root}>
-      <View styleName="vertical h-center">
-        <Caption>{`Match ${match.number}`}</Caption>
-        <View styleName="horizontal v-center h-center" style={style.container}>
-          <Team team={match.teams.home}>
-            {team => (
-              <View styleName="horizontal v-center">
-                <Text style={style.flag}>
-                  <Emoji name={team.emoji} />
-                </Text>
-                <Text style={style.score}>{match.score.home}</Text>
-              </View>
-            )}
-          </Team>
-          <Text>x</Text>
-          <Team team={match.teams.away}>
-            {team => (
-              <View styleName="horizontal v-center">
-                <Text style={style.score}>{match.score.away}</Text>
-                <Text style={style.flag}>
-                  <Emoji name={team.emoji} />
-                </Text>
-              </View>
-            )}
-          </Team>
+class MatchInfo extends Component {
+  renderTeams = () => {
+    const { match, style } = this.props;
+    return (
+      <View styleName="horizontal v-center h-center" style={style.container}>
+        <Team team={match.teams.home}>
+          {team => (
+            <View styleName="horizontal v-center">
+              <Text style={style.flag}>
+                <Emoji name={team.emoji} />
+              </Text>
+              <Text style={style.score}>{match.score.home}</Text>
+            </View>
+          )}
+        </Team>
+        <Text>x</Text>
+        <Team team={match.teams.away}>
+          {team => (
+            <View styleName="horizontal v-center">
+              <Text style={style.score}>{match.score.away}</Text>
+              <Text style={style.flag}>
+                <Emoji name={team.emoji} />
+              </Text>
+            </View>
+          )}
+        </Team>
+      </View>
+    );
+  };
+
+  renderNoTeams = () => {
+    const { style } = this.props;
+    return (
+      <View styleName="horizontal v-center h-center" style={style.container}>
+        <View styleName="horizontal v-center">
+          <Text style={style.flag}>
+            <Emoji name="grey_question" />
+          </Text>
         </View>
-        <View styleName="vertical h-center">
-          <Text style={style.info}>{moment(match.date).format('LLLL')}</Text>
-          <Text style={style.info}>{match.location}</Text>
+        <Text>x</Text>
+        <View styleName="horizontal v-center">
+          <Text style={style.flag}>
+            <Emoji name="grey_question" />
+          </Text>
         </View>
       </View>
-    </View>
-  );
+    );
+  };
+
+  render() {
+    const { match, style } = this.props;
+
+    return (
+      <View style={style.root}>
+        <View styleName="vertical h-center">
+          <Caption>{`Match ${match.number}`}</Caption>
+
+          {match.teams && this.renderTeams()}
+          {!match.teams && this.renderNoTeams()}
+
+          <View styleName="vertical h-center">
+            <Text style={style.info}>{moment(match.date).format('LLLL')}</Text>
+            <Text style={style.info}>{match.location}</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
 }
 
 MatchInfo.propTypes = {
