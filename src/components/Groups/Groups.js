@@ -10,7 +10,10 @@ function Groups({ groups, style }) {
     <ScrollView>
       {groups.map(group => (
         <View key={group.id} styleName="vertical h-center" style={style.root}>
-          <Title>{`Group ${group.name.toUpperCase()}`}</Title>
+          <View styleName="vertical">
+            <Title>{`Group ${group.name.toUpperCase()}`}</Title>
+            <Divider styleName="line md-gutter" />
+          </View>
           <View style={style.fullWidth}>
             {group.table.map(({ team, points }) => (
               <View key={team.code} styleName="vertical h-start">
