@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Button, Text, View } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import { FormattedMessage } from 'react-intl';
 
 function Tabs(props) {
   const { selectedTab, style, styleName, tabs, onTabChange } = props;
@@ -15,7 +16,9 @@ function Tabs(props) {
           style={{ ...style.tab, ...(i === selectedTab ? style.selected : {}) }}
           onPress={() => onTabChange(i)}
         >
-          <Text>{title}</Text>
+          <Text>
+            <FormattedMessage id={title} />
+          </Text>
         </Button>
       ))}
     </View>

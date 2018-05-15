@@ -4,22 +4,30 @@ import { compose } from 'redux';
 import { reduxForm, Field } from 'redux-form';
 import { Text, View, Button, Divider } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import TextInput from '../../form/TextInput';
 
-function Login({ handleSubmit, style }) {
+function Login({ handleSubmit, style, intl }) {
   return (
     <View styleName="vertical" style={style.root}>
       <Field
         name="email"
         component={TextInput}
-        placeholder="Email"
+        placeholder={intl.formatMessage({ id: 'email' })}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Divider styleName="line" />
-      <Field name="password" component={TextInput} placeholder="Password" secureTextEntry />
+      <Field
+        name="password"
+        component={TextInput}
+        placeholder={intl.formatMessage({ id: 'password' })}
+        secureTextEntry
+      />
       <Button style={style.button} styleName="secondary" onPress={handleSubmit}>
-        <Text>Login</Text>
+        <Text>
+          <FormattedMessage id="login" />
+        </Text>
       </Button>
     </View>
   );
@@ -28,6 +36,7 @@ function Login({ handleSubmit, style }) {
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
+  intl: PropTypes.shape({}).isRequired,
 };
 
 const styles = {
@@ -45,6 +54,8 @@ const styles = {
   },
 };
 
-export default compose(reduxForm({ form: 'login' }), connectStyle('com.lucoceano.Login', styles))(
-  Login,
-);
+export default compose(
+  reduxForm({ form: 'login' }),
+  injectIntl,
+  connectStyle('com.lucoceano.Login', styles),
+)(Login);

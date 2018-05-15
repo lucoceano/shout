@@ -4,6 +4,7 @@ import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { View, Screen, NavigationBar, Caption } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import { FormattedMessage } from 'react-intl';
 import { BackButton } from '../NavigationBar';
 import MatchInfo from './MatchInfo';
 import Bet from '../Bet';
@@ -19,11 +20,15 @@ function Match({ match, navigator, style }) {
         />
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={false}>
           <View styleName="vertical v-center h-center" style={style.info}>
-            <Caption>INFORMATION</Caption>
+            <Caption>
+              <FormattedMessage id="information" />
+            </Caption>
           </View>
           <MatchInfo match={match} />
           <View styleName="vertical v-center h-center" style={style.info}>
-            <Caption>BET</Caption>
+            <Caption>
+              <FormattedMessage id="bet" />
+            </Caption>
           </View>
           <Bet match={match} />
         </KeyboardAwareScrollView>

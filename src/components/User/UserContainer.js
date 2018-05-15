@@ -4,6 +4,7 @@ import { Query, Mutation } from 'react-apollo';
 import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
+import { injectIntl } from 'react-intl';
 import User from './User';
 import { getPersistor } from '../../graphql/cache';
 import Leaderboard from '../Leaderboard';
@@ -31,6 +32,7 @@ const logoutMutation = gql`
 class UserContainer extends Component {
   static propTypes = {
     navigator: PropTypes.shape({}).isRequired,
+    intl: PropTypes.shape({}).isRequired,
   };
 
   close = () => {
@@ -47,6 +49,7 @@ class UserContainer extends Component {
   };
 
   render() {
+    const { intl } = this.props;
     return (
       <Mutation mutation={logoutMutation}>
         {logout => (
@@ -64,7 +67,7 @@ class UserContainer extends Component {
                     getPersistor().purge();
                     this.close();
                   } catch (e) {
-                    Snackbar.show({ title: 'Ocorreu um erro' });
+                    Snackbar.show({ title: intl.formatMessage({ id: 'somethingWrong' }) });
                   }
                 }}
               />
@@ -76,6 +79,8 @@ class UserContainer extends Component {
   }
 }
 
-UserContainer.path = 'com.lucoceano.User';
+const intlComponent = injectIntl(UserContainer);
 
-export default UserContainer;
+intlComponent.path = 'com.lucoceano.User';
+
+export default intlComponent;

@@ -17,10 +17,10 @@ class Auth extends Component {
 
   tabs = [
     {
-      title: 'Login',
+      title: 'login',
     },
     {
-      title: 'Sign Up',
+      title: 'signUp',
     },
   ];
 

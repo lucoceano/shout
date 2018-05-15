@@ -4,15 +4,16 @@ import { compose } from 'redux';
 import { reduxForm, Field } from 'redux-form';
 import { Text, View, Button, Divider } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
+import { injectIntl } from 'react-intl';
 import TextInput from '../../form/TextInput';
 
-function SignUp({ handleSubmit, style }) {
+function SignUp({ handleSubmit, style, intl }) {
   return (
     <View styleName="vertical" style={style.root}>
       <Field
         name="firstName"
         component={TextInput}
-        placeholder="Nome"
+        placeholder={intl.formatMessage({ id: 'name' })}
         autoCapitalize="words"
         autoCorrect={false}
       />
@@ -20,7 +21,7 @@ function SignUp({ handleSubmit, style }) {
       <Field
         name="lastName"
         component={TextInput}
-        placeholder="Sobrenome"
+        placeholder={intl.formatMessage({ id: 'lastName' })}
         autoCapitalize="words"
         autoCorrect={false}
       />
@@ -28,12 +29,17 @@ function SignUp({ handleSubmit, style }) {
       <Field
         name="email"
         component={TextInput}
-        placeholder="Email"
+        placeholder={intl.formatMessage({ id: 'email' })}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Divider styleName="line" />
-      <Field name="password" component={TextInput} placeholder="Password" secureTextEntry />
+      <Field
+        name="password"
+        component={TextInput}
+        placeholder={intl.formatMessage({ id: 'password' })}
+        secureTextEntry
+      />
       <Button style={style.button} styleName="secondary" onPress={handleSubmit}>
         <Text>Sign Up</Text>
       </Button>
@@ -44,6 +50,7 @@ function SignUp({ handleSubmit, style }) {
 SignUp.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
+  intl: PropTypes.shape({}).isRequired,
 };
 
 const styles = {
@@ -61,6 +68,8 @@ const styles = {
   },
 };
 
-export default compose(reduxForm({ form: 'signup' }), connectStyle('com.lucoceano.SignUp', styles))(
-  SignUp,
-);
+export default compose(
+  reduxForm({ form: 'signup' }),
+  injectIntl,
+  connectStyle('com.lucoceano.SignUp', styles),
+)(SignUp);

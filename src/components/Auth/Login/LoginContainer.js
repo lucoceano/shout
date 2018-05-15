@@ -4,6 +4,7 @@ import { Mutation, withApollo } from 'react-apollo';
 import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
+import { injectIntl } from 'react-intl';
 import Login from './Login';
 import { isAlreadyLoggedInError } from '../../../lib/error';
 
@@ -24,6 +25,7 @@ class LoginContainer extends Component {
 
   static propTypes = {
     client: PropTypes.shape({}).isRequired,
+    intl: PropTypes.shape({}).isRequired,
   };
 
   close = () => {
@@ -37,6 +39,7 @@ class LoginContainer extends Component {
   };
 
   render() {
+    const { intl } = this.props;
     return (
       <Mutation mutation={loginMutation}>
         {(login, { client }) => (
@@ -52,7 +55,7 @@ class LoginContainer extends Component {
                   this.success(client);
                   return;
                 }
-                Snackbar.show({ title: 'Não foi possível fazer login' });
+                Snackbar.show({ title: intl.formtMessage({ id: 'couldNotLogin' }) });
               }
             }}
           />
@@ -62,4 +65,4 @@ class LoginContainer extends Component {
   }
 }
 
-export default withApollo(LoginContainer);
+export default injectIntl(withApollo(LoginContainer));

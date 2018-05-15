@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import { Button, Text, View, Subtitle, Row, Icon, Divider } from '@shoutem/ui';
-import { connectStyle } from '@shoutem/theme';
+import { FormattedMessage } from 'react-intl';
 import UserAvatar from './UserAvatar';
 
-function UserDetail({ user, style, onLogout, onLeaderboard }) {
+function UserDetail({ user, onLogout, onLeaderboard }) {
   return (
     <View styleName="vertical">
       <View styleName="md-gutter vertical v-center h-center">
@@ -17,20 +17,19 @@ function UserDetail({ user, style, onLogout, onLeaderboard }) {
         <TouchableOpacity onPress={() => onLeaderboard()}>
           <Row styleName="small">
             <Icon name="web" />
-            <Text>Leaderboard</Text>
+            <Text>
+              <FormattedMessage id="leaderboard" />
+            </Text>
             <Icon styleName="disclosure" name="right-arrow" />
           </Row>
         </TouchableOpacity>
         <Divider styleName="line" />
-        <Row styleName="small">
-          <Icon name="about" />
-          <Text>Sobre</Text>
-          <Icon styleName="disclosure" name="right-arrow" />
-        </Row>
       </View>
 
-      <Button style={style.button} styleName="secondary" onPress={onLogout}>
-        <Text>Logout</Text>
+      <Button styleName="secondary lg-gutter" onPress={onLogout}>
+        <Text>
+          <FormattedMessage id="logout" />
+        </Text>
       </Button>
     </View>
   );
@@ -39,14 +38,7 @@ function UserDetail({ user, style, onLogout, onLeaderboard }) {
 UserDetail.propTypes = {
   onLogout: PropTypes.func.isRequired,
   onLeaderboard: PropTypes.func.isRequired,
-  style: PropTypes.shape({}).isRequired,
   user: PropTypes.shape({}).isRequired,
 };
 
-const styles = {
-  button: {
-    margin: 16,
-  },
-};
-
-export default connectStyle('com.lucoceano.UserDetail', styles)(UserDetail);
+export default UserDetail;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Snackbar from 'react-native-snackbar';
+import { injectIntl } from 'react-intl';
 import Match from '../Match';
 import Matches from './Matches';
 import matchFragment from '../../graphql/fragments/match';
@@ -22,6 +23,7 @@ class MatchesContainer extends Component {
     navigator: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
+    intl: PropTypes.shape({}).isRequired,
   };
 
   navigateToMatch = match => {
@@ -29,11 +31,12 @@ class MatchesContainer extends Component {
   };
 
   render() {
+    const { intl } = this.props;
     return (
       <Query query={matchesQuery} pollInterval={pollingInterval} networkPolicy="network-only">
         {({ loading, data: { matches } = {}, error }) => {
           if (error) {
-            Snackbar.show({ title: 'Ocorreu um erro.' });
+            Snackbar.show({ title: intl.formatMessage({ id: 'somethingWrong' }) });
           }
           return <Matches loading={loading} matches={matches} onItemClick={this.navigateToMatch} />;
         }}
@@ -41,4 +44,4 @@ class MatchesContainer extends Component {
     );
   }
 }
-export default MatchesContainer;
+export default injectIntl(MatchesContainer);

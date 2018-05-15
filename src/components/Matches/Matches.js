@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, ListView } from '@shoutem/ui';
+import { ListView } from '@shoutem/ui';
 import MatchRow from './MatchRow';
 
-export default function Matches({ loading, matches, error, onItemClick }) {
-  if (error) {
-    return <Text>Sorry something is wrong</Text>;
-  }
-
+export default function Matches({ loading, matches, onItemClick }) {
   return (
     <ListView
       data={matches}
@@ -21,10 +17,8 @@ Matches.propTypes = {
   loading: PropTypes.bool.isRequired,
   onItemClick: PropTypes.func.isRequired,
   matches: PropTypes.arrayOf(PropTypes.object),
-  error: PropTypes.shape({}),
 };
 
 Matches.defaultProps = {
   matches: [],
-  error: undefined,
 };

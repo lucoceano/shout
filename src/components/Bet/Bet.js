@@ -1,29 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { View, Text, Button, Spinner } from '@shoutem/ui';
+import { View, Text, Button } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import Emoji from 'react-native-emoji';
 import { reduxForm, Field } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+import Loading from '../Loading';
 import SwitchInput from '../form/Switch';
 import TextInput from '../form/TextInput';
 
 function Bet({ match, loading, loggedIn, style, onLoginRequest, handleSubmit }) {
   if (loading) {
-    return (
-      <View styleName="center">
-        <Spinner />
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   if (!loggedIn) {
     return (
       <View styleName="vertical" style={style.root}>
-        <Text styleName="h-center">Você precisa estar logado para fazer um palpite.</Text>
+        <Text styleName="h-center">
+          <FormattedMessage id="loginNeededToBet" />
+        </Text>
         <Button styleName="secondary" style={style.button} onPress={onLoginRequest}>
-          <Text>Logar</Text>
+          <Text>
+            <FormattedMessage id="login" />
+          </Text>
         </Button>
       </View>
     );
@@ -67,12 +68,16 @@ function Bet({ match, loading, loggedIn, style, onLoginRequest, handleSubmit }) 
 
       <View styleName="horizontal h-center v-center">
         <Field component={SwitchInput} name="penalty" />
-        <Text styleName="md-gutter-left">Penalty</Text>
+        <Text styleName="md-gutter-left">
+          <FormattedMessage id="penalty" />
+        </Text>
       </View>
 
       <View styleName="vertical h-end lg-gutter-top">
         <Button styleName="secondary" style={style.save} onPress={handleSubmit}>
-          <Text>Salvar</Text>
+          <Text>
+            <FormattedMessage id="save" />
+          </Text>
         </Button>
       </View>
     </View>

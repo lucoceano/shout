@@ -33,6 +33,7 @@ const initialValues = { penalty: false };
 class BetContainer extends Component {
   static propTypes = {
     match: PropTypes.shape({}).isRequired,
+    intl: PropTypes.shape({}).isRequired,
   };
 
   onLoginRequest = () => {
@@ -42,7 +43,7 @@ class BetContainer extends Component {
   };
 
   render() {
-    const { match } = this.props;
+    const { match, intl } = this.props;
     return (
       <Mutation mutation={betMutation}>
         {configureBet => (
@@ -58,9 +59,9 @@ class BetContainer extends Component {
                 onSubmit={async ({ id, ...input }) => {
                   try {
                     await configureBet({ variables: { input: { ...input, matchId: match.id } } });
-                    Snackbar.show({ title: 'Palpite salvo com sucesso.' });
+                    Snackbar.show({ title: intl.formatMessage({ id: 'betSavedSucessfully' }) });
                   } catch (e) {
-                    Snackbar.show({ title: 'Não foi possível salvar seu palpite.' });
+                    Snackbar.show({ title: intl.formatMessage({ id: 'betCouldNotBeSaved' }) });
                   }
                 }}
               />

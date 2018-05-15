@@ -21,10 +21,10 @@ class Header extends Component {
 
   tabs = [
     {
-      title: 'Matches',
+      title: 'matches',
     },
     {
-      title: 'Groups',
+      title: 'groups',
     },
   ];
 
