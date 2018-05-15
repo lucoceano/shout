@@ -1,18 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Text, View, Image, Subtitle } from '@shoutem/ui';
+import { TouchableOpacity } from 'react-native';
+import { Button, Text, View, Subtitle, Row, Icon, Divider } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
-import md5 from 'crypto-js/md5';
+import UserAvatar from './UserAvatar';
 
-function UserDetail({ user, style, onLogout }) {
+function UserDetail({ user, style, onLogout, onLeaderboard }) {
   return (
     <View styleName="vertical">
       <View styleName="md-gutter vertical v-center h-center">
-        <Image
-          styleName="medium-avatar md-gutter"
-          source={{ uri: `https://www.gravatar.com/avatar/${md5(user.email.toLowerCase())}?s=200` }}
-        />
+        <UserAvatar user={user} />
         <Subtitle styleName="md-gutter">{user.name}</Subtitle>
+      </View>
+
+      <View styleName="md-gutter vertical">
+        <TouchableOpacity onPress={() => onLeaderboard()}>
+          <Row styleName="small">
+            <Icon name="web" />
+            <Text>Leaderboard</Text>
+            <Icon styleName="disclosure" name="right-arrow" />
+          </Row>
+        </TouchableOpacity>
+        <Divider styleName="line" />
+        <Row styleName="small">
+          <Icon name="about" />
+          <Text>Sobre</Text>
+          <Icon styleName="disclosure" name="right-arrow" />
+        </Row>
       </View>
 
       <Button style={style.button} styleName="secondary" onPress={onLogout}>
@@ -24,6 +38,7 @@ function UserDetail({ user, style, onLogout }) {
 
 UserDetail.propTypes = {
   onLogout: PropTypes.func.isRequired,
+  onLeaderboard: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
   user: PropTypes.shape({}).isRequired,
 };

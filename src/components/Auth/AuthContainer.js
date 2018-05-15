@@ -6,7 +6,6 @@ class AuthContainer extends Component {
   static path = 'com.lucoceano.Auth';
 
   close = () => {
-    console.log('sdasda')
     Navigation.dismissModal();
   };
 

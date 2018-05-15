@@ -7,14 +7,15 @@ import App from '../components/App';
 import Match from '../components/Match';
 import User from '../components/User';
 import Auth from '../components/Auth';
+import Leaderboard from '../components/Leaderboard';
 
 const defaultNavigatorStyle = {
   navBarHidden: true,
 };
 
-const components = [App, Match, User, Auth];
+const components = [App, Match, User, Auth, Leaderboard];
 
-const withApollo = (WrappedComponent, client, store, intl) => {
+const withProviders = (WrappedComponent, client, store, intl) => {
   function Enhance(props) {
     return (
       <Provider store={store}>
@@ -30,7 +31,7 @@ const withApollo = (WrappedComponent, client, store, intl) => {
 };
 
 const registerScreen = (client, store, intl, component, styles = {}) => {
-  const Component = withApollo(component, client, store, intl);
+  const Component = withProviders(component, client, store, intl);
   Component.navigatorStyle = { ...defaultNavigatorStyle, ...styles };
 
   Navigation.registerComponent(component.path, () => Component);

@@ -85,6 +85,7 @@ Bet.propTypes = {
   onLoginRequest: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const styles = {

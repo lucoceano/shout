@@ -1,9 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch as UISwitch, View } from '@shoutem/ui';
 
-function Switch(props) {
-  const { input, ...inputProps } = props;
-
+function Switch({ input, ...inputProps }) {
   return (
     <View>
       <UISwitch
@@ -11,10 +10,14 @@ function Switch(props) {
         onValueChange={input.onChange}
         onBlur={input.onBlur}
         onFocus={input.onFocus}
-        value={Boolean(input.value)}
+        value={input.value}
       />
     </View>
   );
 }
+
+Switch.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+};
 
 export default Switch;

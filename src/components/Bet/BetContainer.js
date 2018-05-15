@@ -28,6 +28,8 @@ const betMutation = gql`
   ${betFragment}
 `;
 
+const initialValues = { penalty: false };
+
 class BetContainer extends Component {
   static propTypes = {
     match: PropTypes.shape({}).isRequired,
@@ -47,7 +49,7 @@ class BetContainer extends Component {
           <Query query={betQuery} variables={{ matchId: match.id }}>
             {({ loading, data: { bet } = {}, error = {} }) => (
               <Bet
-                initialValues={removeTypename(bet)}
+                initialValues={removeTypename(bet || initialValues)}
                 loading={loading}
                 loggedIn={Boolean(bet || !isNotLoggedInError(error.graphQLErrors))}
                 bet={bet}

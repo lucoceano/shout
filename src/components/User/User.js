@@ -6,7 +6,7 @@ import UserDetail from './UserDetail';
 import Loading from '../Loading';
 import Auth from '../Auth';
 
-function User({ loading, user, onLogout, onClose }) {
+function User({ loading, user, onLogout, onClose, onLeaderboard }) {
   if (!user && !loading) {
     return <Auth />;
   }
@@ -19,7 +19,7 @@ function User({ loading, user, onLogout, onClose }) {
         rightComponent={<CloseButton onClose={onClose} disableGutter />}
       />
       {loading && <Loading />}
-      {!loading && <UserDetail user={user} onLogout={onLogout} />}
+      {!loading && <UserDetail user={user} onLogout={onLogout} onLeaderboard={onLeaderboard} />}
     </Screen>
   );
 }
@@ -27,6 +27,7 @@ function User({ loading, user, onLogout, onClose }) {
 User.propTypes = {
   onLogout: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onLeaderboard: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   user: PropTypes.shape({}),
 };

@@ -1,8 +1,20 @@
 export default {
   date: {
     full: {
-      pt: { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' },
-      en: { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' },
+      pt: {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      },
+      en: {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      },
     },
     matchDay: {
       pt: {

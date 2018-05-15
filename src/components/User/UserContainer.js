@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Query, Mutation } from 'react-apollo';
 import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
 import User from './User';
 import { getPersistor } from '../../graphql/cache';
+import Leaderboard from '../Leaderboard';
 
 const meQuery = gql`
   query me {
     me {
+      id
       name
       email
+      leaderboard {
+        position
+        points
+      }
     }
   }
 `;
@@ -22,8 +29,21 @@ const logoutMutation = gql`
 `;
 
 class UserContainer extends Component {
+  static propTypes = {
+    navigator: PropTypes.shape({}).isRequired,
+  };
+
   close = () => {
     Navigation.dismissModal();
+  };
+
+  goToLeaderboard = user => {
+    const { navigator } = this.props;
+
+    navigator.push({
+      screen: Leaderboard.path,
+      passProps: { user },
+    });
   };
 
   render() {
@@ -36,6 +56,7 @@ class UserContainer extends Component {
                 loading={loading}
                 user={me}
                 onClose={this.close}
+                onLeaderboard={() => this.goToLeaderboard(me)}
                 onLogout={async () => {
                   try {
                     await logout();

@@ -4,7 +4,15 @@ export default {
     en: 'Match {number}',
   },
   positionNumber: {
-    pt: '{number}º',
-    en: '{number}º',
+    pt: '{position}º',
+    en: '{position}º',
+  },
+  leaderboard: {
+    pt: 'Leaderboard',
+    en: 'Leaderboard',
+  },
+  pointsNumber: {
+    pt: '{points} pontos',
+    en: '{points} points',
   },
 };

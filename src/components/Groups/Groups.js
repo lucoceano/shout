@@ -28,7 +28,7 @@ function Groups({ groups, style }) {
                   </View>
                   <View styleName="horizontal h-end" style={{}}>
                     <Text>
-                      <FormattedMessage id="positionNumber" values={{ number: index + 1 }} />
+                      <FormattedMessage id="positionNumber" values={{ position: index + 1 }} />
                     </Text>
                   </View>
                 </View>

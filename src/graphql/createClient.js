@@ -26,6 +26,7 @@ export default function createClient(uri) {
     onError(({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, code, locations, path }) =>
+          // eslint-disable-next-line
           console.log(
             `[GraphQL error]: Message: ${message}, Code: ${code}, Location: ${locations}, Path: ${path}`,
           ),
@@ -33,7 +34,7 @@ export default function createClient(uri) {
       }
 
       if (networkError) {
-        console.log(`[Network error]: ${networkError} - ${response}`);
+        console.log(`[Network error]: ${networkError} - ${response}`); // eslint-disable-line
       }
     }),
     new HttpLink({

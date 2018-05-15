@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import Login from './Login';
 import { isAlreadyLoggedInError } from '../../../lib/error';
 
+// eslint-disable-next-line
 const initialValues = __DEV__ ? { email: 'lucoceano@gmail.com', password: 'Mamamia27' } : undefined;
 
 const loginMutation = gql`
