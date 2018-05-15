@@ -13,9 +13,11 @@ import formats from './formats';
 
 addLocaleData([...pt, ...en, ...es]);
 
-const deviceLocale = DeviceInfo.getDeviceLocale();
+const deviceLocale = DeviceInfo.getDeviceLocale().slice(0, 2);
+const supportedLocales = ['en', 'pt'];
+const selectedLocale = supportedLocales.includes(deviceLocale) ? deviceLocale : 'pt';
 
-moment.locale([deviceLocale, 'pt']);
+moment.locale([selectedLocale, 'pt']);
 moment.tz.setDefault(DeviceInfo.getTimezone());
 
 function getLocalizedObject(object, locale, depth = 0) {
@@ -29,9 +31,9 @@ function getLocalizedObject(object, locale, depth = 0) {
 }
 
 export default {
-  locale: deviceLocale,
+  locale: selectedLocale,
   textComponent: Text,
-  messages: getLocalizedObject(messages, deviceLocale),
-  formats: getLocalizedObject(formats, deviceLocale, 1),
-  countries: countries[deviceLocale],
+  messages: getLocalizedObject(messages, selectedLocale),
+  formats: getLocalizedObject(formats, selectedLocale, 1),
+  countries: countries[selectedLocale],
 };
