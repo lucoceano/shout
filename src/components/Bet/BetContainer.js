@@ -4,6 +4,7 @@ import { Navigation } from 'react-native-navigation';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Snackbar from 'react-native-snackbar';
+import { injectIntl } from 'react-intl';
 import Bet from './Bet';
 import Auth from '../Auth';
 import { isNotLoggedInError } from '../../lib/error';
@@ -73,4 +74,4 @@ class BetContainer extends Component {
   }
 }
 
-export default BetContainer;
+export default injectIntl(BetContainer);

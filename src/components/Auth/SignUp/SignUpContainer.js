@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { injectIntl } from 'react-intl';
 import SignUp from './SignUp';
 import { isAlreadyLoggedInError } from '../../../lib/error';
-import { getPersistor } from '../../../graphql/cache';
+import { storeCookie } from '../../../graphql/cookie';
 
 const loginMutation = gql`
   mutation signup($input: SignupInput!) {
@@ -30,11 +30,15 @@ class SignUpContainer extends Component {
     Navigation.dismissModal();
   };
 
-  success = () => {
-    const { client } = this.props;
+  success = async () => {
+    const { client, intl } = this.props;
     client.resetStore();
-    getPersistor().purge();
-    this.close();
+    try {
+      await storeCookie();
+      this.close();
+    } catch (e) {
+      Snackbar.show({ title: intl.formtMessage({ id: 'couldNotLogin' }) });
+    }
   };
 
   render() {
@@ -46,7 +50,7 @@ class SignUpContainer extends Component {
             onSubmit={async input => {
               try {
                 await login({ variables: { input } });
-                this.success(client);
+                await this.success(client);
               } catch ({ graphQLErrors }) {
                 if (isAlreadyLoggedInError(graphQLErrors)) {
                   this.success(client);

@@ -8,7 +8,7 @@ import Match from '../Match';
 import Matches from './Matches';
 import matchFragment from '../../graphql/fragments/match';
 
-const pollingInterval = 5000;
+const pollingInterval = 500000;
 const matchesQuery = gql`
   query matches {
     matches {

@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import { injectIntl } from 'react-intl';
 import Login from './Login';
 import { isAlreadyLoggedInError } from '../../../lib/error';
+import { storeCookie } from '../../../graphql/cookie';
 
 // eslint-disable-next-line
 const initialValues = __DEV__ ? { email: 'lucoceano@gmail.com', password: 'Mamamia27' } : undefined;
@@ -32,27 +33,32 @@ class LoginContainer extends Component {
     Navigation.dismissModal();
   };
 
-  success = () => {
-    const { client } = this.props;
+  success = async () => {
+    const { client, intl } = this.props;
     client.resetStore();
-    this.close();
+    try {
+      await storeCookie();
+      this.close();
+    } catch (e) {
+      Snackbar.show({ title: intl.formtMessage({ id: 'couldNotLogin' }) });
+    }
   };
 
   render() {
     const { intl } = this.props;
     return (
       <Mutation mutation={loginMutation}>
-        {(login, { client }) => (
+        {login => (
           <Login
             initialValues={initialValues}
             onClose={this.close}
             onSubmit={async input => {
               try {
                 await login({ variables: { input } });
-                this.success(client);
+                await this.success();
               } catch ({ graphQLErrors }) {
                 if (isAlreadyLoggedInError(graphQLErrors)) {
-                  this.success(client);
+                  await this.success();
                   return;
                 }
                 Snackbar.show({ title: intl.formtMessage({ id: 'couldNotLogin' }) });

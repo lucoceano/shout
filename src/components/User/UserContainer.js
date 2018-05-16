@@ -6,7 +6,7 @@ import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
 import { injectIntl } from 'react-intl';
 import User from './User';
-import { getPersistor } from '../../graphql/cache';
+import { clearCookie } from '../../graphql/cookie';
 import Leaderboard from '../Leaderboard';
 
 const meQuery = gql`
@@ -64,7 +64,7 @@ class UserContainer extends Component {
                   try {
                     await logout();
                     client.resetStore();
-                    getPersistor().purge();
+                    await clearCookie();
                     this.close();
                   } catch (e) {
                     Snackbar.show({ title: intl.formatMessage({ id: 'somethingWrong' }) });

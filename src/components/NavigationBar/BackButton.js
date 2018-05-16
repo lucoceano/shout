@@ -14,7 +14,11 @@ BackButton.propTypes = {
   navigator: PropTypes.shape({
     pop: PropTypes.func.isRequired,
   }).isRequired,
-  iconStyle: PropTypes.shape({}).isRequired,
+  iconStyle: PropTypes.shape({}),
+};
+
+BackButton.defaultProps = {
+  iconStyle: undefined,
 };
 
 export default BackButton;
