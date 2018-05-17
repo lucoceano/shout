@@ -31,6 +31,7 @@ class MatchesContainer extends Component {
   };
 
   render() {
+    console.log('dasds')
     const { intl } = this.props;
     return (
       <Query query={matchesQuery} pollInterval={pollingInterval} networkPolicy="network-only">

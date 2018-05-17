@@ -2,7 +2,6 @@ import DeviceInfo from 'react-native-device-info';
 import { Text } from 'react-native';
 import pt from 'react-intl/locale-data/pt';
 import en from 'react-intl/locale-data/en';
-import es from 'react-intl/locale-data/es';
 import { addLocaleData } from 'react-intl';
 import moment from 'moment-timezone';
 import 'moment/src/locale/pt';
@@ -11,7 +10,7 @@ import countries from './countries';
 import messages from './messages';
 import formats from './formats';
 
-addLocaleData([...pt, ...en, ...es]);
+addLocaleData([...pt, ...en]);
 
 const deviceLocale = DeviceInfo.getDeviceLocale().slice(0, 2);
 const supportedLocales = ['en', 'pt'];

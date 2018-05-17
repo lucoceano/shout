@@ -1,8 +1,11 @@
-import { Navigation } from 'react-native-navigation';
+import 'intl';
+import { Platform } from 'react-native';
+import { Navigation, NativeEventsReceiver } from 'react-native-navigation';
 import createClient from './graphql/createClient';
 import createStore from './redux/createStore';
 import registerScreens from './screens';
 import intl from './intl';
+import './lib/polyfill';
 
 const apiURL = 'https://shout-server.herokuapp.com/graphql';
 // const apiURL = 'http://localhost:3000/graphql';
@@ -12,10 +15,21 @@ const store = createStore();
 
 registerScreens(client, store, intl);
 
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: 'com.lucoceano.App',
-  },
-});
+function startApp() {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'com.lucoceano.App',
+    },
+  });
+}
 
-
+if (Platform.OS === 'ios') {
+  startApp();
+} else {
+  Navigation.isAppLaunched().then(appLaunched => {
+    if (appLaunched) {
+      startApp();
+    }
+    new NativeEventsReceiver().appLaunched(startApp);
+  });
+}

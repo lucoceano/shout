@@ -5,6 +5,7 @@ import { Navigation } from 'react-native-navigation';
 import Snackbar from 'react-native-snackbar';
 import gql from 'graphql-tag';
 import { injectIntl } from 'react-intl';
+
 import Login from './Login';
 import { isAlreadyLoggedInError } from '../../../lib/error';
 import { storeCookie } from '../../../graphql/cookie';
