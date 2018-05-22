@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Screen, NavigationBar } from '@shoutem/ui';
+import { Screen, NavigationBar, View } from '@shoutem/ui';
 import CloseButton from '../CloseButton';
 import UserDetail from './UserDetail';
 import Loading from '../Loading';
@@ -8,7 +8,11 @@ import Auth from '../Auth';
 
 function User({ loading, user, onLogout, onClose, onLeaderboard }) {
   if (loading) {
-    return <Loading />;
+    return (
+      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <Loading />
+      </View>
+    );
   }
 
   if (!user && !loading) {

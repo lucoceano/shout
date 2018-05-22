@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { View, Text, Title, Screen, NavigationBar } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 import { FormattedMessage } from 'react-intl';
@@ -9,10 +9,27 @@ import Loading from '../Loading';
 import { BackButton } from '../NavigationBar';
 import LeaderboardRow from './LeaderboardRow';
 
+const LeaderboardNavigationBar = ({ navigator }) => (
+  <NavigationBar
+    styleName="clear"
+    centerComponent={
+      <Title>
+        <FormattedMessage id="leaderboard" />
+      </Title>
+    }
+    leftComponent={<BackButton navigator={navigator} iconStyle={{ color: '#FFFFFF' }} />}
+  />
+);
+
+LeaderboardNavigationBar.propTypes = {
+  navigator: PropTypes.shape({}).isRequired,
+};
+
 function Leaderboard({ user, loading, leaderboard, navigator, style }) {
   return (
     <Screen>
       <View styleName="md-gutter" style={style.header}>
+        {Platform.OS !== 'ios' && <LeaderboardNavigationBar navigator={navigator} />}
         <View styleName="horizontal v-center h-center md-gutter lg-gutter-top">
           <Text styleName="h-center" style={style.userIndicator}>
             <FormattedMessage
@@ -26,15 +43,7 @@ function Leaderboard({ user, loading, leaderboard, navigator, style }) {
           </Text>
         </View>
       </View>
-      <NavigationBar
-        styleName="clear"
-        centerComponent={
-          <Title>
-            <FormattedMessage id="leaderboard" />
-          </Title>
-        }
-        leftComponent={<BackButton navigator={navigator} iconStyle={{ color: '#FFFFFF' }} />}
-      />
+      {Platform.OS === 'ios' && <LeaderboardNavigationBar navigator={navigator} />}
       {loading && <Loading />}
       {!loading && (
         <FlatList
