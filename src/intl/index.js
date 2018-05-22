@@ -1,10 +1,10 @@
 import DeviceInfo from 'react-native-device-info';
 import { Text } from 'react-native';
+import { addLocaleData } from 'react-intl';
 import pt from 'react-intl/locale-data/pt';
 import en from 'react-intl/locale-data/en';
-import { addLocaleData } from 'react-intl';
-import moment from 'moment-timezone';
-import 'moment/src/locale/pt';
+import 'intl/locale-data/jsonp/en';
+import 'intl/locale-data/jsonp/pt';
 
 import countries from './countries';
 import messages from './messages';
@@ -15,9 +15,6 @@ addLocaleData([...pt, ...en]);
 const deviceLocale = DeviceInfo.getDeviceLocale().slice(0, 2);
 const supportedLocales = ['en', 'pt'];
 const selectedLocale = supportedLocales.includes(deviceLocale) ? deviceLocale : 'pt';
-
-moment.locale([selectedLocale, 'pt']);
-moment.tz.setDefault(DeviceInfo.getTimezone());
 
 function getLocalizedObject(object, locale, depth = 0) {
   return Object.keys(object).reduce(

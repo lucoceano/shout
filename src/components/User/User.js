@@ -7,6 +7,10 @@ import Loading from '../Loading';
 import Auth from '../Auth';
 
 function User({ loading, user, onLogout, onClose, onLeaderboard }) {
+  if (loading) {
+    return <Loading />;
+  }
+
   if (!user && !loading) {
     return <Auth />;
   }
@@ -18,7 +22,6 @@ function User({ loading, user, onLogout, onClose, onLeaderboard }) {
         title="Profile"
         rightComponent={<CloseButton onClose={onClose} disableGutter />}
       />
-      {loading && <Loading />}
       {!loading && <UserDetail user={user} onLogout={onLogout} onLeaderboard={onLeaderboard} />}
     </Screen>
   );

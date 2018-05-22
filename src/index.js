@@ -8,7 +8,6 @@ import intl from './intl';
 import './lib/polyfill';
 
 const apiURL = 'https://shout-server.herokuapp.com/graphql';
-// const apiURL = 'http://localhost:3000/graphql';
 const client = createClient(apiURL);
 
 const store = createStore();

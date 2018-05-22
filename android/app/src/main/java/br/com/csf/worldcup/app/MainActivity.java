@@ -1,4 +1,4 @@
-package com.shout;
+package br.com.csf.worldcup.app;
 
 import com.reactnativenavigation.controllers.SplashActivity;
 

@@ -1,4 +1,4 @@
-package com.shout;
+package br.com.csf.worldcup.app;
 
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;

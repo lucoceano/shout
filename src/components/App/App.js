@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Screen } from '@shoutem/ui';
+import { Navigation } from 'react-native-navigation';
 import Matches from '../Matches';
 import Groups from '../Groups';
 import Header from '../Header';
@@ -17,8 +18,7 @@ class App extends Component {
   };
 
   onUserClick = () => {
-    const { navigator } = this.props;
-    navigator.showModal({
+    Navigation.showModal({
       screen: User.path,
     });
   };

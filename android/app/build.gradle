@@ -94,19 +94,31 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion "25.2.0"
 
     defaultConfig {
-        applicationId "com.shout"
+        applicationId "br.com.csf.worldcup.app"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 27
+        versionCode 35
+        versionName "2.0.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs {
+        release {
+            release {
+                storeFile file("libs/release.keystore")
+                storePassword "Onaeco27"
+                keyAlias "world_cup"
+                keyPassword "world_cup"
+            }
+        }
+    }
+
     splits {
         abi {
             reset()
@@ -115,9 +127,11 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
