@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native';
 import { Screen, View } from '@shoutem/ui';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -32,20 +33,24 @@ class Auth extends Component {
     const { onClose } = this.props;
     const { selectedTab } = this.state;
     return (
-      <Screen>
-        <View styleName="vertical">
-          <Tabs
-            tabs={this.tabs}
-            styleName="h-center lg-gutter xl-gutter-right xl-gutter-left"
-            onTabChange={this.changeTab}
-            selectedTab={selectedTab}
-          />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Screen>
+          <KeyboardAvoidingView behavior="position" enabled>
+            <View styleName="vertical">
+              <Tabs
+                tabs={this.tabs}
+                styleName="h-center lg-gutter xl-gutter-right xl-gutter-left"
+                onTabChange={this.changeTab}
+                selectedTab={selectedTab}
+              />
 
-          <CloseButton onClose={onClose} />
-          {selectedTab === 0 && <Login />}
-          {selectedTab === 1 && <SignUp />}
-        </View>
-      </Screen>
+              <CloseButton onClose={onClose} />
+              {selectedTab === 0 && <Login />}
+              {selectedTab === 1 && <SignUp />}
+            </View>
+          </KeyboardAvoidingView>
+        </Screen>
+      </TouchableWithoutFeedback>
     );
   }
 }

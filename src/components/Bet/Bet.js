@@ -108,6 +108,7 @@ const styles = {
     padding: 8,
     fontSize: 44,
     width: 64,
+    height: 64,
     textAlign: 'center',
   },
   flag: {
@@ -120,4 +121,7 @@ const styles = {
   },
 };
 
-export default compose(connectStyle('com.lucoceano.Bet', styles), reduxForm({ form: 'bet' }))(Bet);
+export default compose(
+  connectStyle('com.lucoceano.Bet', styles),
+  reduxForm({ form: 'bet', enableReinitialize: true }),
+)(Bet);

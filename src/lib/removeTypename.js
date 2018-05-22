@@ -6,7 +6,7 @@ const removeTypename = value => {
   } else if (typeof value === 'object') {
     const newObj = {};
     Object.entries(value).forEach(([key, v]) => {
-      if (key !== '__typename') {
+      if (key !== '__typename' && key !== '@@id') {
         newObj[key] = removeTypename(v);
       }
     });

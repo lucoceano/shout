@@ -41,7 +41,7 @@ function SignUp({ handleSubmit, style, intl }) {
         secureTextEntry
       />
       <Button style={style.button} styleName="secondary" onPress={handleSubmit}>
-        <Text>Sign Up</Text>
+        <Text>{intl.formatMessage({ id: 'signUp' })}</Text>
       </Button>
     </View>
   );
@@ -57,7 +57,7 @@ const styles = {
   root: {
     backgroundColor: '#00000000',
     padding: 16,
-    paddingTop: 32,
+    marginTop: 32,
   },
   button: {
     margin: 16,

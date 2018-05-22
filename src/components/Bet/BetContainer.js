@@ -59,7 +59,9 @@ class BetContainer extends Component {
                 onLoginRequest={this.onLoginRequest}
                 onSubmit={async ({ id, ...input }) => {
                   try {
-                    await configureBet({ variables: { input: { ...input, matchId: match.id } } });
+                    await configureBet({
+                      variables: { input: { ...input, matchId: match.id } },
+                    });
                     Snackbar.show({ title: intl.formatMessage({ id: 'betSavedSucessfully' }) });
                   } catch (e) {
                     Snackbar.show({ title: intl.formatMessage({ id: 'betCouldNotBeSaved' }) });

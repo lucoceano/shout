@@ -43,7 +43,7 @@ const styles = {
   root: {
     backgroundColor: '#00000000',
     padding: 16,
-    paddingTop: 32,
+    marginTop: 32,
   },
   button: {
     margin: 16,
