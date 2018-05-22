@@ -7,7 +7,7 @@ import { connectStyle } from '@shoutem/theme';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import Team from './Team';
 
-const defaultFlagSize = 75;
+const defaultFlagSize = 64;
 const proportion = Dimensions.get('window').width / 375;
 
 class MatchInfo extends Component {
@@ -45,13 +45,13 @@ class MatchInfo extends Component {
     return (
       <View styleName="horizontal v-center h-center" style={style.container}>
         <View styleName="horizontal v-center">
-          <Text style={style.flag}>
+          <Text style={style.noFlag}>
             <Emoji name="grey_question" />
           </Text>
         </View>
         <Text>x</Text>
         <View styleName="horizontal v-center">
-          <Text style={style.flag}>
+          <Text style={style.noFlag}>
             <Emoji name="grey_question" />
           </Text>
         </View>
@@ -100,6 +100,10 @@ const styles = {
     paddingLeft: 16 * proportion,
     paddingRight: 16 * proportion,
     fontSize: defaultFlagSize * proportion,
+  },
+  noFlag: {
+    padding: 16 * proportion,
+    fontSize: 24 * proportion,
   },
   container: {
     justifyContent: 'center',
