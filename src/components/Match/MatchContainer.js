@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import Match from './Match';
 import matchFragment from '../../graphql/fragments/match';
 
-const pollingInterval = 50000;
+const pollingInterval = 5000;
 const matcheQuery = gql`
   query match($id: String!) {
     match(id: $id) {

@@ -66,12 +66,14 @@ function Bet({ match, loading, loggedIn, style, onLoginRequest, handleSubmit }) 
         </View>
       </View>
 
-      <View styleName="horizontal h-center v-center">
-        <Field component={SwitchInput} name="penalty" />
-        <Text styleName="md-gutter-left">
-          <FormattedMessage id="penalty" />
-        </Text>
-      </View>
+      {match.number >= 48 && (
+        <View styleName="horizontal h-center v-center">
+          <Field component={SwitchInput} name="penalty" />
+          <Text styleName="md-gutter-left">
+            <FormattedMessage id="penalty" />
+          </Text>
+        </View>
+      )}
 
       <View styleName="vertical h-end lg-gutter-top">
         <Button styleName="secondary" style={style.save} onPress={handleSubmit}>
