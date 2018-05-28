@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListView } from '@shoutem/ui';
+import moment from 'moment-timezone';
+import { FormattedDate } from 'react-intl';
+import { ListView, Divider, Caption } from '@shoutem/ui';
 import MatchRow from './MatchRow';
 
 export default function Matches({ loading, matches, onItemClick }) {
@@ -8,6 +10,19 @@ export default function Matches({ loading, matches, onItemClick }) {
     <ListView
       data={matches}
       loading={loading}
+      renderSectionHeader={sectionDate => (
+        <Divider styleName="section-header">
+          <Caption>
+            <FormattedDate
+              value={new Date(sectionDate)}
+              year="numeric"
+              month="long"
+              day="2-digit"
+            />
+          </Caption>
+        </Divider>
+      )}
+      getSectionId={match => moment(match.date).format('YYYY-MM-DDT12:00:00')}
       renderRow={match => <MatchRow match={match} onClick={onItemClick} />}
     />
   );
