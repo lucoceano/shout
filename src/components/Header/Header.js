@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationBar, Button, Icon } from '@shoutem/ui';
-import { connectStyle } from '@shoutem/theme';
+import { connectStyle } from '../../style';
 import Tabs from '../Tabs';
 
 class Header extends Component {
@@ -22,9 +22,11 @@ class Header extends Component {
   tabs = [
     {
       title: 'matches',
+      style: 'light',
     },
     {
       title: 'groups',
+      style: 'light',
     },
   ];
 
@@ -46,13 +48,12 @@ class Header extends Component {
           <Tabs
             tabs={this.tabs}
             styleName="flexible"
-            style={style.tabs}
             onTabChange={this.changeTab}
             selectedTab={selectedTab}
           />
         }
         rightComponent={
-          <Button onPress={onUserClick}>
+          <Button onPress={onUserClick} styleName="secondary clear">
             <Icon name="user-profile" />
           </Button>
         }

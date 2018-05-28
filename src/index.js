@@ -10,6 +10,8 @@ import './lib/polyfill';
 const apiURL = 'https://shout-server.herokuapp.com/graphql';
 const client = createClient(apiURL);
 
+console.disableYellowBox = true;
+
 const store = createStore();
 
 registerScreens(client, store, intl);

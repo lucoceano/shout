@@ -24,7 +24,7 @@ function User({ loading, user, onLogout, onClose, onLeaderboard }) {
       <NavigationBar
         styleName="inline"
         title="Profile"
-        rightComponent={<CloseButton onClose={onClose} disableGutter />}
+        rightComponent={<CloseButton styleName="secondary clear" onClose={onClose} disableGutter />}
       />
       {!loading && <UserDetail user={user} onLogout={onLogout} onLeaderboard={onLeaderboard} />}
     </Screen>

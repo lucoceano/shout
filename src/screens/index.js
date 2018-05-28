@@ -3,11 +3,13 @@ import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 import { IntlProvider } from 'react-intl';
 import { Navigation } from 'react-native-navigation';
+import { StyleProvider } from '@shoutem/theme';
 import App from '../components/App';
 import Match from '../components/Match';
 import User from '../components/User';
 import Auth from '../components/Auth';
 import Leaderboard from '../components/Leaderboard';
+import theme from '../style/theme';
 
 const defaultNavigatorStyle = {
   navBarHidden: true,
@@ -21,7 +23,9 @@ const withProviders = (WrappedComponent, client, store, intl) => {
       <Provider store={store}>
         <ApolloProvider client={client}>
           <IntlProvider {...intl}>
-            <WrappedComponent {...props} />
+            <StyleProvider style={theme}>
+              <WrappedComponent {...props} />
+            </StyleProvider>
           </IntlProvider>
         </ApolloProvider>
       </Provider>

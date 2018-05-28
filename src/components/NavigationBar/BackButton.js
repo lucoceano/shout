@@ -4,7 +4,7 @@ import { Button, Icon } from '@shoutem/ui';
 
 function BackButton({ navigator, iconStyle }) {
   return (
-    <Button onPress={() => navigator.pop()}>
+    <Button styleName="secondary clear" onPress={() => navigator.pop()}>
       <Icon name="back" style={iconStyle} />
     </Button>
   );

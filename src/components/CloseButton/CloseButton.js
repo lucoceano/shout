@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Button, Icon } from '@shoutem/ui';
 import { connectStyle } from '@shoutem/theme';
 
-function CloseButton({ style, onClose, disableGutter }) {
+function CloseButton({ style, styleName, onClose, disableGutter }) {
   const styling = disableGutter ? {} : { style: style.close };
   return (
-    <Button styleName="clear" onPress={onClose} {...styling}>
+    <Button styleName={styleName} onPress={onClose} {...styling}>
       <Icon name="close" />
     </Button>
   );
@@ -16,10 +16,12 @@ CloseButton.propTypes = {
   onClose: PropTypes.func.isRequired,
   style: PropTypes.shape({}).isRequired,
   disableGutter: PropTypes.bool,
+  styleName: PropTypes.string,
 };
 
 CloseButton.defaultProps = {
   disableGutter: false,
+  styleName: 'clear',
 };
 
 const styles = {
